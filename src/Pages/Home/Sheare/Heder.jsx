@@ -1,7 +1,16 @@
+import { signOut } from 'firebase/auth';
 import React from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link } from 'react-router-dom';
+import auth from '../../../firebase.init';
 
 const Heder = ({ children }) => {
+    const [user] = useAuthState(auth);
+    const handelSignOut = () => {
+        signOut(auth);
+     localStorage.removeItem("accessToken")
+
+      };
     const items = (
         <>
         
@@ -18,7 +27,15 @@ const Heder = ({ children }) => {
             <Link to="/calendar">Calendar</Link>
           </li>
           <li>
-            <Link to="/signUp">SignUp</Link>
+          { user? (
+     <button  className="nav-link text-red-500 font-bold hover:text-gray-700 focus:text-gray-700 p-0" onClick={handelSignOut}>
+     signOut{" "}
+   </button>
+   ):(
+    <Link to='/signUp' className="nav-link text-black hover:text-gray-700 focus:text-gray-700 p-0">SignUp</Link>
+   )}
+
+       
           </li>
         
         </>

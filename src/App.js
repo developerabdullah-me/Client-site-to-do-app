@@ -10,6 +10,8 @@ import Calender from './Pages/Calender';
 
 import { ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import ToDo from './Pages/ToDo';
+import RequireAuth from './Pages/Home/Sheare/RequireAuth';
 function App() {
   return (
     <div>
@@ -17,6 +19,7 @@ function App() {
         <Routes>
           <Route path="/completed" element={<Completed></Completed>}></Route>
           <Route path="/calendar" element={<Calender></Calender>}></Route>
+          <Route path="/todo" element={<RequireAuth><ToDo/></RequireAuth>}></Route>
           <Route path="/signup" element={<SignUp></SignUp>}></Route>
           <Route path="/login" element={<Login></Login>}></Route>
         </Routes>

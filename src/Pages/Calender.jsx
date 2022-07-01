@@ -13,7 +13,7 @@ const Calender = () => {
     const [selectedDay, setSelectedDay] = useState(new Date()) ;
 
     const footer = selectedDay ? (
-      <p>You selected {format(selectedDay, 'PPP')}.</p>
+      <p>You selected {format(selectedDay, 'PPPP')}.</p>
     ) : (
       <p>Please pick a day.</p>
     );
@@ -26,7 +26,7 @@ const Calender = () => {
     const { register, handleSubmit } = useForm();
     const onSubmit = data =>{
       console.log(data);
-      const url=`http://localhost:5001/todoService?=${selectedDay}`
+      const url=`http://localhost:5000/todoService?=${selectedDay}`
       fetch(url, {
     method: 'POST',
     headers: {
@@ -43,7 +43,7 @@ const Calender = () => {
   
     }
     return (
-        <div>
+        <div className="md:flex mt-24  gap-20 px-28 ">
      <div>
      <DayPicker
       mode="single"
@@ -53,7 +53,8 @@ const Calender = () => {
     />  
      </div>
      <form className=' grid justify-center shadow-lg md:w-1/3 mx-auto py-6' onSubmit={handleSubmit(onSubmit)}>
-     
+     <input className='mb-5 outline-none w-72 outline-gray-900 py-3 px-2 ' placeholder='Hed line' {...register("hedLine" )} required/>
+
       <input className='mb-5 block outline-none w-72 outline-gray-900 py-3 px-2 ' value={user.email} placeholder='email' type="email" {...register("email")}required />
 
       <input className='mb-5 block outline-none w-72 outline-gray-900 py-3 px-2 ' 
