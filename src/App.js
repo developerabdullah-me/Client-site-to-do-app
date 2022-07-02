@@ -13,6 +13,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import ToDo from './Pages/ToDo';
 import RequireAuth from './Pages/Home/Sheare/RequireAuth';
 import Update from './Pages/Update';
+import Footer from './Pages/Footer';
 function App() {
   return (
     <div>
@@ -27,6 +28,7 @@ function App() {
           <Route path="/login" element={<Login></Login>}></Route>
         </Routes>
       </Heder>
+      <Footer/>
       <ToastContainer />
     </div>
   );

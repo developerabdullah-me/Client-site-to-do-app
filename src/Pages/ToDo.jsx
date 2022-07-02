@@ -16,7 +16,7 @@ const ToDo = () => {
     useEffect(() => {
       const myToDo = async () => {
         const email = user.email;
-        const url = `http://localhost:5000/myAddedItems?email=${email}`;
+        const url = `https://tragically-drake-33182.herokuapp.com/myAddedItems?email=${email}`;
   
         try {
           const { data } = await axios.get(url, {
@@ -45,16 +45,14 @@ const ToDo = () => {
       const proceed = window.confirm("Are you sure?");
   
       if (proceed) {
-        const url = `http://localhost:5000/toDoDelete/${id}`;
+        const url = `https://tragically-drake-33182.herokuapp.com/toDoDelete/${id}`;
         fetch(url, {
           method: "DELETE",
         })
           .then((res) => res.json())
           .then((data) => {
-            const remaining = ToDo.filter(
-              (ToDo) => ToDo._id !== id
-            );
-            setToDo(remaining);
+            const remaining = ToDo.filter((ToDo) => ToDo._id !== id );
+          setToDo(remaining);
           });
       }
     };

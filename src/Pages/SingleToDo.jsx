@@ -18,56 +18,28 @@ const SingleToDo = (props) => {
   const handelUpdate = (id) => {
     navigate(`/upDate/${_id}`);
   };
-  const [done, setDone] = useState(false);
 
-  const toDoInputForCompleted = {
-    id: _id,
-    email: email,
-    date: date,
-    title: hedLine,
-    content: description,
-  };
 
-  const handlePostToDo = (data) => {
-    const url=`http://localhost:5000/todoService?=${toDoInputForCompleted}`
-        // const url=`http://localhost:5000/todoService.?=${toDoInputForCompleted}`
-        fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
+  const addCompleted = () => {
+
+    fetch(`https://tragically-drake-33182.herokuapp.com/tasks/completed/${email}`, {
+        method: "PUT",
+        headers: {
+            authorization: `Bearer ${localStorage.getItem('accessToken')}`
+        }
     })
-    .then(response => response.json())
-    .then(data => {
-
-      toast.success('Success',data)
-
-    })
-
-  //   axios
-  //     .post(`http://localhost:5000/todoService?=${toDoInputForCompleted}`)
-  //     .then((res) => {
-  //       const { data } = res;
-  //       if (data?.insertedId) {
-  //         toast.success(
-  //           "Your To-Do added in completed task page successfully."
-  //         );
-  //       } else {
-  //         toast.error(
-  //           "Faild to added your To-Do in completed taks. Please try again."
-  //         );
-  //       }
-  //     });
-  };
-
-
-
-
- 
-
-
-
+        .then(res => {
+            if (res.status === 403) {
+                toast.error('Failed to add completed.')
+            }
+            return res.json()
+        })
+        .then(data => {
+            if (data.modifiedCount > 0) {
+                toast.success('Successfully add completed')
+            }
+        })
+}
 
 
   return (
@@ -83,7 +55,7 @@ const SingleToDo = (props) => {
 
              <button onClick={() =>handelUpdate(_id)} className="  rounded"><GrDocumentUpdate className="text-center"/></button>
 
-            <input onClick={() => handlePostToDo(setDone(!done))} type="checkbox" name="done" className='w-5 h-5 rounded-full' />
+            <input onClick={addCompleted}  type="radio" name="done" className='w-5 h-5 rounded-full' />
             </div>
             </div>
 

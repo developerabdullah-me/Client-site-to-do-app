@@ -10,7 +10,7 @@ const Update = () => {
   const {date,description,hedLine,_id} = ToDo;
 
   useEffect(() => {
-    fetch(`http://localhost:5000/update/${Id}`)
+    fetch(`https://tragically-drake-33182.herokuapp.com/update/${Id}`)
       .then(res => res.json())
       .then(data =>{ 
           
@@ -26,7 +26,7 @@ const Update = () => {
 
     const updatedData =  restock + NewToDo
     setNewToDo(updatedData)
-    const url = `http://localhost:5000/update/${Id}`
+    const url = `https://tragically-drake-33182.herokuapp.com/update/${Id}`
 
     fetch(url, {
         method: 'PUT',
@@ -49,17 +49,18 @@ event.target.reset()
            
         
            <div>
-      <div className="shadow-lg w-80  mx-auto p-5 mb-7">
+      <div className="shadow-lg w-3/4  mx-auto p-5 mb-7">
         <div className=" ">
         
           <div className="text-center">
-            <h1>hedLine {hedLine} </h1>
-            <p> description: {description}</p>
+            {/* <h1>hedLine {hedLine} </h1>
+            <p> description: {description}</p> */}
             {/* <p>price:{description}</p> */}
 
             <form onSubmit={handleQuantityUpdate}>
-            <textarea className="w-24 py-3 mr-2 bg-slate-300"  type="text"  name='restock' placeholder='up date' required/>
-            <button className="btn">Added</button>
+            <textarea className="w-2/3 py-3 mr-2 bg-slate-300"  type="text"  name='restock' placeholder='up date' required/>
+            <br />
+            <button className="btn">Update</button>
             </form>
 
           </div>
